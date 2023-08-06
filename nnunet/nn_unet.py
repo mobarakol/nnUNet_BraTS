@@ -20,7 +20,7 @@ import torch
 import torch.nn as nn
 # from apex.optimizers import FusedAdam, FusedSGD
 from torch.optim import Adam, SGD
-from data_loading.data_module import get_data_path, get_test_fnames
+from data_loading.data_module import get_data_path, get_test_fnames_predict
 from monai.inferers import sliding_window_inference
 from monai.networks.nets import DynUNet
 from nnunet.brats22_model import UNet3D

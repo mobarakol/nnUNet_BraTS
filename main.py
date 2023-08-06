@@ -42,7 +42,7 @@ def get_trainer(args, callbacks):
         callbacks=callbacks,
         num_sanity_val_steps=0,
         accelerator="gpu",
-        gpus=2,
+        # gpus=2,
         # accelerator="dp",
         devices=args.gpus,
         num_nodes=args.nodes,

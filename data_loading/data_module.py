@@ -48,7 +48,7 @@ class DataModule(LightningDataModule):
 
     def setup(self, stage=None):
         if self.args.exec_mode == "predict":
-            eta = load_data(self.data_path, "*_meta.npy")
+            meta = load_data(self.data_path, "*_meta.npy")
             imgs = load_data(self.data_path, "*_x.npy")
             self.test_imgs, test_meta = get_test_fnames(self.args, self.data_path, meta)
         else:

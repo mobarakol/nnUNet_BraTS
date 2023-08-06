@@ -304,7 +304,7 @@ class NNUnet(pl.LightningModule):
     def save_mask(self, pred):
         if self.test_idx == 0:
             data_path = get_data_path(self.args)
-            self.test_imgs, _ = get_test_fnames(self.args, data_path)
+            self.test_imgs, _ = get_test_fnames_predict(self.args, data_path)
         fname = os.path.basename(self.test_imgs[self.test_idx]).replace("_x", "")
         np.save(os.path.join(self.save_dir, fname), pred, allow_pickle=False)
         self.test_idx += 1

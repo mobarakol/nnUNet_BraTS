@@ -48,8 +48,9 @@ class DataModule(LightningDataModule):
 
     def setup(self, stage=None):
         if self.args.exec_mode == "predict":
-            test_meta = load_data(self.data_path, "*_meta.npy")
-            self.test_imgs = load_data(self.data_path, "*_x.npy")
+            meta = load_data(self.data_path, "*_meta.npy")
+            imgs = load_data(self.data_path, "*_x.npy")
+            self.test_imgs, test_meta = get_test_fnames_predict(self.args, self.data_path, meta)
         else:
             meta = load_data(self.data_path, "*_meta.npy")
             orig_lbl = load_data(self.data_path, "*_orig_lbl.npy")
@@ -106,6 +107,15 @@ def get_test_fnames(args, data_path, meta=None):
         test_imgs = sorted(get_split(test_imgs, val_idx))
         if meta is not None:
             meta = sorted(get_split(meta, val_idx))
+    return test_imgs, meta
+    
+
+def get_test_fnames_predict(args, data_path, meta=None):
+    test_imgs = load_data(data_path, "*_x.npy", non_empty=False)
+    if args.exec_mode == "predict":
+        test_imgs = sorted(test_imgs)
+        if meta is not None:
+            meta = sorted(meta)
     return test_imgs, meta
 
 
